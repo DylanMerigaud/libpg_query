@@ -106,6 +106,10 @@ int main() {
 				  "duplicate function body specified"))
 		ret_code = EXIT_FAILURE;
 
+	if (!expect_error("CREATE FUNCTION f(VARIADIC a int) RETURNS int AS $$ BEGIN RETURN 1; END; $$ LANGUAGE plpgsql;",
+				  "VARIADIC parameter must be an array"))
+		ret_code = EXIT_FAILURE;
+
 	if (!expect_no_error("CREATE FUNCTION f() RETURNS int LANGUAGE sql RETURN 1;"))
 		ret_code = EXIT_FAILURE;
 

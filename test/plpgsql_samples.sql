@@ -618,3 +618,10 @@ DECLARE
 BEGIN
 END;
 $$ LANGUAGE plpgsql;
+
+-- VARIADIC parameter of an array type
+CREATE FUNCTION variadic_count(VARIADIC nums int[]) RETURNS int AS $$
+BEGIN
+    RETURN array_length(nums, 1);
+END;
+$$ LANGUAGE plpgsql;
